@@ -1,0 +1,171 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Specs SMS Dashboard</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <style>
+
+        body{
+            margin:0;
+            font-family:Arial;
+            background:#0f172a;
+            color:white;
+        }
+
+        .header{
+            padding:25px;
+            text-align:center;
+            background:#111827;
+            font-size:28px;
+            font-weight:bold;
+        }
+
+        .container{
+            max-width:850px;
+            margin:auto;
+            padding:20px;
+        }
+
+        .card{
+            background:#111827;
+            border-radius:18px;
+            padding:20px;
+            margin-bottom:20px;
+            box-shadow:0 0 20px rgba(0,0,0,.3);
+        }
+
+        input{
+            width:100%;
+            padding:14px;
+            margin-top:8px;
+            margin-bottom:16px;
+            border:none;
+            border-radius:12px;
+            background:#1e293b;
+            color:white;
+            font-size:16px;
+            box-sizing:border-box;
+        }
+
+        button{
+            width:100%;
+            padding:16px;
+            border:none;
+            border-radius:12px;
+            background:#2563eb;
+            color:white;
+            font-size:18px;
+            cursor:pointer;
+        }
+
+        .alert-card{
+            background:#1e293b;
+            border-radius:12px;
+            padding:15px;
+            margin-top:10px;
+        }
+
+        .small{
+            color:#94a3b8;
+            font-size:14px;
+        }
+
+        @media(max-width:600px){
+            .header{
+                font-size:22px;
+            }
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<div class="header">
+    Specs SMS Alerts
+</div>
+
+<div class="container">
+
+    <div class="card">
+
+        <h2>Create Alert</h2>
+
+        <form method="POST">
+
+            <input name="name" placeholder="Dad's Name" required>
+
+            <input name="email" placeholder="Email Address" required>
+
+            <input name="password" placeholder="Email App Password" required>
+
+            <input name="imap_server" value="imap.gmail.com" required>
+
+            <input name="sender" placeholder="Sender Email To Watch" required>
+
+            <input name="phone" placeholder="+1XXXXXXXXXX" required>
+
+            <h3>Twilio Settings</h3>
+
+            <input name="twilio_sid" placeholder="Twilio SID" required>
+
+            <input name="twilio_token" placeholder="Twilio Auth Token" required>
+
+            <input name="twilio_number" placeholder="Twilio Phone Number" required>
+
+            <button>Create Instant Alert</button>
+
+        </form>
+
+    </div>
+
+    <div class="card">
+
+        <h2>Active Alerts</h2>
+
+        {% for alert in alerts %}
+
+        <div class="alert-card">
+
+            <b>{{ alert.name }}</b><br><br>
+
+            Watching:<br>
+            {{ alert.sender }}<br><br>
+
+            Sending SMS To:<br>
+            {{ alert.phone }}
+
+        </div>
+
+        {% endfor %}
+
+        {% if not alerts %}
+        <div class="small">No alerts configured yet.</div>
+        {% endif %}
+
+    </div>
+
+    <div class="card">
+
+        <h2>Features</h2>
+
+        <div class="small">
+            • Instant email monitoring<br>
+            • SMS link forwarding<br>
+            • Mobile friendly dashboard<br>
+            • Docker support<br>
+            • Gmail compatible<br>
+            • Great for older/non-technical users<br>
+            • Easy one-page setup
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>
